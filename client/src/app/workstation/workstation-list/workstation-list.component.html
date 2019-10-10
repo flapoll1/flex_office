@@ -1,14 +1,27 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-<p>Flex Office System</p>
-<input type="date" formControlName="selectedDate">
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <input type="date" formControlName="selectedDate">
+  <button type="submit">Nach freien Plätzen suchen</button>
+</form>
 <div>
-  <ul>
+  <!--Freie Plätze am {{this.form.value.selectedDate | date: 'dd.MM.yyyy'}}-->
+  <ol>
     <li *ngFor="let workstation of workstationList">
-      <div *ngIf="workstation.freeDays | containsSelectedDate: this.formDate">
-          {{workstation.id}}, {{workstation.label}}, {{workstation.telephone}}, {{workstation.mouse}}, {{workstation.headset}}, {{workstation.noise}}, {{workstation.freeDays}}
-      </div>
-    </li>
-  </ul>
-</div>
+      <ul>
+        <li>Platznummer: {{workstation.label}}</li>
+        <li>Telefon vorhanden: {{workstation.telephone}}</li>
+        <li> Maus vorhanden: {{workstation.mouse}}</li>
+        <li> Headset vorhanden {{workstation.headset}}</li>
+        <li>Lautstärke-Level {{workstation.noise}}</li>
+        <li>Freie Tage: {{workstation.freeDays}}</li>
+      </ul>
 
+<br>
+</li>
+
+</ol>
+</div>
