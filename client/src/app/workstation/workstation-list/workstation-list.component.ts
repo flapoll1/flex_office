@@ -3,7 +3,7 @@ import { Workstation } from '../workstation.entity';
 import { FormGroup, FormControl } from '@angular/forms';
 import { startOfDay } from 'date-fns/fp';
 import { WorkstationService } from '../workstation.service';
-import { startOfToday } from 'date-fns';
+import { startOfToday, format } from 'date-fns';
 
 @Component({
   selector: 'app-workstation-list',
@@ -25,16 +25,17 @@ export class WorkstationListComponent implements OnInit {
   }
 
   initForm() {
-    this.formDate = startOfToday();
+    const todayString = format(startOfToday(), 'yyyy-MM-dd');
     this.form = new FormGroup({
-      selectedDate: new FormControl(this.formDate),
+      selectedDate: new FormControl(todayString),
       mouseNeeded: new FormControl(false),
       headsetNeeded: new FormControl(false),
       telephoneNeeded: new FormControl(false)
     });
-    this.workstationService
-      .getAll()
-      .subscribe((result: Workstation[]) => {this.workstationList = result; });
+    this.workstationService.getAll().subscribe((result: Workstation[]) => {
+      this.workstationList = result;
+    });
+    this.filteredWorkstations = this.workstationList;
   }
 
   /* @To DO:
@@ -44,12 +45,13 @@ export class WorkstationListComponent implements OnInit {
 
   }*/
 
-
   onChange() {
     this.filteredWorkstations = this.filterByDate(this.workstationList);
     this.filteredWorkstations = this.filterByMouse(this.filteredWorkstations);
     this.filteredWorkstations = this.filterByHeadset(this.filteredWorkstations);
-    this.filteredWorkstations = this.filterByTelephone(this.filteredWorkstations);
+    this.filteredWorkstations = this.filterByTelephone(
+      this.filteredWorkstations
+    );
   }
 
   containsDate(selectedDate, value: Workstation) {
@@ -62,11 +64,13 @@ export class WorkstationListComponent implements OnInit {
   }
 
   filterByDate(data: Workstation[]): Workstation[] {
-    return data.filter(this.containsDate.bind(this, this.form.value.selectedDate));
+    return data.filter(
+      this.containsDate.bind(this, this.form.value.selectedDate)
+    );
   }
 
   hasMouse(mouseNeeded, value: Workstation) {
-    if (!mouseNeeded || (mouseNeeded === value.mouse)) {
+    if (!mouseNeeded || mouseNeeded === value.mouse) {
       return true;
     }
     return false;
@@ -77,26 +81,33 @@ export class WorkstationListComponent implements OnInit {
   }
 
   hasHeadset(headsetNeeded, value: Workstation) {
-    if (!headsetNeeded || (headsetNeeded === value.headset)) {
+    if (!headsetNeeded || headsetNeeded === value.headset) {
       return true;
     }
     return false;
   }
 
   filterByHeadset(data: Workstation[]) {
-    return data.filter(this.hasHeadset.bind(this, this.form.value.headsetNeeded));
+    return data.filter(
+      this.hasHeadset.bind(this, this.form.value.headsetNeeded)
+    );
   }
 
   hasTelephone(telephoneNeeded, value: Workstation) {
-    if (!telephoneNeeded || (telephoneNeeded === value.telephone)) {
+    if (!telephoneNeeded || telephoneNeeded === value.telephone) {
       return true;
     }
     return false;
   }
 
   filterByTelephone(data: Workstation[]) {
-    return data.filter(this.hasTelephone.bind(this, this.form.value.telephoneNeeded));
+    return data.filter(
+      this.hasTelephone.bind(this, this.form.value.telephoneNeeded)
+    );
   }
 
-
+  openRoomplan() {
+    const myRoomPlanWindow = window.open('', 'MsgWindow');
+    myRoomPlanWindow.document.write('<img style="width:85em" src="../../assets/Bueros_GIS.jpg"/>');
+  }
 }

@@ -12,15 +12,17 @@
 <div>
   <!--Freie Plätze am {{this.form.value.selectedDate | date: 'dd.MM.yyyy'}}-->
   <p *ngIf="filteredWorkstations?.length === 0">Es sind leider keine freien Plätze verfügbar</p>
-  <p *ngIf="filteredWorkstations?.length != 0 && form.dirty ">Es sind {{filteredWorkstations?.length }} frei(e) Plätze verfügbar</p>
+  <p *ngIf="filteredWorkstations?.length == 1 ">Es ist {{filteredWorkstations?.length }} freier Platz verfügbar:</p>
+  <p *ngIf="filteredWorkstations?.length > 1 ">Es sind {{filteredWorkstations?.length }} freie Plätze verfügbar:</p>
+  <a (click)="openRoomplan()"><button>Raumplan</button></a>
   <ol>
     <li *ngFor="let workstation of filteredWorkstations">
       <ul>
         <li>Platznummer: {{workstation.label}}</li>
-        <li>Telefon vorhanden: <div *ngIf="workstation.telephone">ja</div><div *ngIf="!workstation.telephone">nein</div></li>
-        <li> Maus vorhanden: <div *ngIf="workstation.mouse">ja</div><div *ngIf="!workstation.mouse">nein</div></li>
-        <li> Headset vorhanden: <div *ngIf="workstation.headset">ja</div><div *ngIf="!workstation.headset">nein</div></li>
-        <li>Lautstärke-Level: <div [ngSwitch]="workstation.noise"><div *ngSwitchCase=0 >niedrig</div><div *ngSwitchCase=1 >mittel</div><div *ngSwitchCase=2 >laut</div></div> </li>
+        <li>Telefon vorhanden: <span *ngIf="workstation.telephone">ja</span><span *ngIf="!workstation.telephone">nein</span></li>
+        <li> Maus vorhanden: <span *ngIf="workstation.mouse">ja</span><span *ngIf="!workstation.mouse">nein</span></li>
+        <li> Headset vorhanden: <span *ngIf="workstation.headset">ja</span><span *ngIf="!workstation.headset">nein</span></li>
+        <li>Lautstärke-Level: <span [ngSwitch]="workstation.noise"><span *ngSwitchCase=0 >niedrig</span><span *ngSwitchCase=1 >mittel</span><span *ngSwitchCase=2 >laut</span></span> </li>
         <li>Freie Tage: {{workstation.freeDays}} </li>
       </ul>
 
