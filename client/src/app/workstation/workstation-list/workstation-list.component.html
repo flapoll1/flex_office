@@ -27,12 +27,12 @@
   <table class="table table-striped table-hover" *ngIf="filteredWorkstations?.length !== 0">
     <thead style="background:  rgb(29,77,139);color:white">
     <tr>
-          <th>Platznummer</th>
-          <th>Telefon vorhanden</th>
-          <th> Maus vorhanden</th>
-          <th> Headset vorhanden</th>
-          <th>Lautstärke-Level</th>
-          <th>Freie Tage</th>
+          <th style="text-align:center" >Platznummer</th>
+          <th  style="text-align:center" >Telefon vorhanden</th>
+          <th  style="text-align:center" > Maus vorhanden</th>
+          <th  style="text-align:center" > Headset vorhanden</th>
+          <th  style="text-align:center" >Lautstärke-Level</th>
+          <th  style="text-align:center" >Freie Tage</th>
         </tr>
       </thead>
       <tbody>
@@ -42,7 +42,7 @@
         <td align="center" *ngIf="workstation.mouse">ja</td><td align="center" *ngIf="!workstation.mouse">nein</td>
         <td align="center" *ngIf="workstation.headset">ja</td><td align="center" *ngIf="!workstation.headset">nein</td>
         <td align="center" *ngIf="workstation.noise === 0">niedrig</td><td align="center" *ngIf="workstation.noise === 1" >mittel</td><td align="center" *ngIf="workstation.noise === 2" >laut</td>
-        <td align="center" ><div style="padding-top:15px"><ul><li *ngFor="let day of workstation.freeDays">{{day | date : 'dd.MM.yyyy'}}</li></ul></div></td>
+        <td align="left" ><div style="padding-top:15px;"><ul style="list-style: none"><li *ngFor="let day of workstation.freeDays">{{day | date : 'dd.MM.yyyy'}}</li></ul></div></td>
     </tr>
   </tbody>
   </table>
