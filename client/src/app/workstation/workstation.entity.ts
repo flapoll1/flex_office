@@ -5,5 +5,5 @@ export interface Workstation {
   mouse: boolean;
   headset: boolean;
   noise: number;
-  freeDays: Date[];
+  freeDays: string[];
 }
