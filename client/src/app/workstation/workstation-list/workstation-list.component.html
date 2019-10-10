@@ -15,19 +15,22 @@
   <p *ngIf="filteredWorkstations?.length == 1 ">Es ist {{filteredWorkstations?.length }} freier Platz verfügbar:</p>
   <p *ngIf="filteredWorkstations?.length > 1 ">Es sind {{filteredWorkstations?.length }} freie Plätze verfügbar:</p>
   <a (click)="openRoomplan()"><button>Raumplan</button></a>
-  <ol>
-    <li *ngFor="let workstation of filteredWorkstations">
-      <ul>
-        <li>Platznummer: {{workstation.label}}</li>
-        <li>Telefon vorhanden: <span *ngIf="workstation.telephone">ja</span><span *ngIf="!workstation.telephone">nein</span></li>
-        <li> Maus vorhanden: <span *ngIf="workstation.mouse">ja</span><span *ngIf="!workstation.mouse">nein</span></li>
-        <li> Headset vorhanden: <span *ngIf="workstation.headset">ja</span><span *ngIf="!workstation.headset">nein</span></li>
-        <li>Lautstärke-Level: <span [ngSwitch]="workstation.noise"><span *ngSwitchCase=0 >niedrig</span><span *ngSwitchCase=1 >mittel</span><span *ngSwitchCase=2 >laut</span></span> </li>
-        <li>Freie Tage: {{workstation.freeDays}} </li>
-      </ul>
-
-<br>
-</li>
-
-</ol>
+  <table>
+      <tr>
+          <th>Platznummer</th>
+          <th>Telefon vorhanden</th>
+          <th> Maus vorhanden</th>
+          <th> Headset vorhanden</th>
+          <th>Lautstärke-Level</th>
+          <th>Freie Tage</th>
+        </tr>
+    <tr *ngFor="let workstation of filteredWorkstations">
+        <td>{{workstation.label}}</td>
+        <td *ngIf="workstation.telephone">ja</td><td *ngIf="!workstation.telephone">nein</td>
+        <td *ngIf="workstation.mouse">ja</td><td *ngIf="!workstation.mouse">nein</td>
+        <td *ngIf="workstation.headset">ja</td><td *ngIf="!workstation.headset">nein</td>
+        <td *ngIf="workstation.noise === 0">niedrig</td><td *ngIf="workstation.noise === 1" >mittel</td><td *ngIf="workstation.noise === 2" >laut</td>
+        <td>{{workstation.freeDays}}</td>
+    </tr>
+  </table>
 </div>
