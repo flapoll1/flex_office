@@ -2,21 +2,30 @@
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
+<div  style="background: rgb(192,222,248);width:10%;float:left;height:120px;margin:auto" >
+  <img src="/assets/FlexOffice.png"
+  style="height:70px;display:block; margin-left:auto; margin-top:20px;margin-right:auto; margin-bottom:auto;"/>
+</div>
+<div  style="background: rgb(192,222,248);width:70%;float:left;height:120px" >
+
 <form [formGroup]="form" >
-
  <br>Gewünschtes Datum: &nbsp;&nbsp; <input type="date" formControlName="selectedDate" (change)="onChange($event)">
-  <br>Wird Maus benötigt? &nbsp;&nbsp;<input type="checkbox" formControlName="mouseNeeded" (change)="onChange($event)">
-  <br>Wird Headset benötigt? &nbsp;&nbsp;<input type="checkbox" formControlName="headsetNeeded" (change)="onChange($event)">
-  <br>Wird Telefon benötigt? &nbsp;&nbsp;<input type="checkbox" formControlName="telephoneNeeded" (change)="onChange($event)">
+  <br><br>Ausstattung:&nbsp;&nbsp;
+   <input type="checkbox" formControlName="telephoneNeeded" (change)="onChange($event)">&nbsp;&nbsp;Telefon&nbsp;&nbsp;&nbsp;&nbsp;
+  <input type="checkbox" formControlName="headsetNeeded" (change)="onChange($event)">&nbsp;&nbsp;Headset&nbsp;&nbsp;&nbsp;&nbsp;
+  <input type="checkbox" formControlName="mouseNeeded" (change)="onChange($event)">&nbsp;&nbsp;Maus&nbsp;&nbsp;&nbsp;&nbsp;
 </form>
+</div>
+<div  style="background: rgb(188,201,72);width:20%;float:left;height:120px" >&nbsp;<br><br><br></div>
 
-    <!--Freie Plätze am {{this.form.value.selectedDate | date: 'dd.MM.yyyy'}}-->
+<div style="width:100%;clear:left;padding-top:10px">
+    <a style="float: right" (click)="openRoomplan()"><button>Raumplan</button></a>
   <p *ngIf="filteredWorkstations?.length === 0">Es sind leider keine freien Plätze verfügbar</p>
   <p *ngIf="filteredWorkstations?.length == 1 ">Es ist {{filteredWorkstations?.length }} freier Platz verfügbar:</p>
   <p *ngIf="filteredWorkstations?.length > 1 ">Es sind {{filteredWorkstations?.length }} freie Plätze verfügbar:</p>
-  <a (click)="openRoomplan()"><button>Raumplan</button></a>
+
   <table class="table table-striped" *ngIf="filteredWorkstations?.length !== 0">
-    <thead>
+    <thead style="background:  rgb(29,77,139);color:white">
     <tr>
           <th>Platznummer</th>
           <th>Telefon vorhanden</th>
@@ -37,4 +46,4 @@
     </tr>
   </tbody>
   </table>
-
+</div>
