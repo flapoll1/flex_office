@@ -4,21 +4,22 @@
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-  <input type="date" formControlName="selectedDate">
-  <button type="submit">Nach freien Plätzen suchen</button>
+ <br>Gewünschtes Datum: &nbsp;&nbsp; <input type="date" formControlName="selectedDate" (change)="onSelectDay($event)">
+  <br>Wird Maus benötigt? &nbsp;&nbsp;<input type="checkbox" formControlName="mouseNeeded" (change)="onSelectMouse($event)">
+ <br> <button type="submit">Nach freien Plätzen suchen</button>
 </form>
 <div>
   <!--Freie Plätze am {{this.form.value.selectedDate | date: 'dd.MM.yyyy'}}-->
-  <p *ngIf="workstationList.length === 0">Es sind leider keine freien Plätze verfügbar</p>
+  <p *ngIf="workstationList?.length === 0">Es sind leider keine freien Plätze verfügbar</p>
   <ol>
-    <li *ngFor="let workstation of workstationList">
+    <li *ngFor="let workstation of filteredWorkstations">
       <ul>
         <li>Platznummer: {{workstation.label}}</li>
         <li>Telefon vorhanden: <div *ngIf="workstation.telephone">ja</div><div *ngIf="!workstation.telephone">nein</div></li>
         <li> Maus vorhanden: <div *ngIf="workstation.mouse">ja</div><div *ngIf="!workstation.mouse">nein</div></li>
         <li> Headset vorhanden: <div *ngIf="workstation.headset">ja</div><div *ngIf="!workstation.headset">nein</div></li>
         <li>Lautstärke-Level: <div [ngSwitch]="workstation.noise"><div *ngSwitchCase=0 >niedrig</div><div *ngSwitchCase=1 >mittel</div><div *ngSwitchCase=2 >laut</div></div> </li>
-        <li>Freie Tage: <div *ngIf="workstation.freeDays">ja</div><div *ngIf="!workstation.freeDays">nein</div></li>
+        <li>Freie Tage: {{workstation.freeDays}} </li>
       </ul>
 
 <br>
