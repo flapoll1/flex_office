@@ -1,22 +1,23 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form" >
 
  <br>Gewünschtes Datum: &nbsp;&nbsp; <input type="date" formControlName="selectedDate" (change)="onChange($event)">
   <br>Wird Maus benötigt? &nbsp;&nbsp;<input type="checkbox" formControlName="mouseNeeded" (change)="onChange($event)">
   <br>Wird Headset benötigt? &nbsp;&nbsp;<input type="checkbox" formControlName="headsetNeeded" (change)="onChange($event)">
   <br>Wird Telefon benötigt? &nbsp;&nbsp;<input type="checkbox" formControlName="telephoneNeeded" (change)="onChange($event)">
 </form>
-<div>
-  <!--Freie Plätze am {{this.form.value.selectedDate | date: 'dd.MM.yyyy'}}-->
+
+    <!--Freie Plätze am {{this.form.value.selectedDate | date: 'dd.MM.yyyy'}}-->
   <p *ngIf="filteredWorkstations?.length === 0">Es sind leider keine freien Plätze verfügbar</p>
   <p *ngIf="filteredWorkstations?.length == 1 ">Es ist {{filteredWorkstations?.length }} freier Platz verfügbar:</p>
   <p *ngIf="filteredWorkstations?.length > 1 ">Es sind {{filteredWorkstations?.length }} freie Plätze verfügbar:</p>
   <a (click)="openRoomplan()"><button>Raumplan</button></a>
-  <table>
-      <tr>
+  <table class="table table-striped" *ngIf="filteredWorkstations?.length !== 0">
+    <thead>
+    <tr>
           <th>Platznummer</th>
           <th>Telefon vorhanden</th>
           <th> Maus vorhanden</th>
@@ -24,6 +25,8 @@
           <th>Lautstärke-Level</th>
           <th>Freie Tage</th>
         </tr>
+      </thead>
+      <tbody>
     <tr *ngFor="let workstation of filteredWorkstations">
         <td>{{workstation.label}}</td>
         <td *ngIf="workstation.telephone">ja</td><td *ngIf="!workstation.telephone">nein</td>
@@ -32,5 +35,6 @@
         <td *ngIf="workstation.noise === 0">niedrig</td><td *ngIf="workstation.noise === 1" >mittel</td><td *ngIf="workstation.noise === 2" >laut</td>
         <td>{{workstation.freeDays}}</td>
     </tr>
+  </tbody>
   </table>
-</div>
+
