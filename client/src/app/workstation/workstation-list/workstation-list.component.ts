@@ -3,6 +3,7 @@ import { Workstation } from '../workstation.entity';
 import { FormGroup, FormControl } from '@angular/forms';
 import { startOfDay } from 'date-fns/fp';
 import { WorkstationService } from '../workstation.service';
+import { startOfToday } from 'date-fns';
 
 @Component({
   selector: 'app-workstation-list',
@@ -24,9 +25,12 @@ export class WorkstationListComponent implements OnInit {
   }
 
   initForm() {
+    this.formDate = startOfToday();
     this.form = new FormGroup({
       selectedDate: new FormControl(this.formDate),
-      mouseNeeded: new FormControl(false)
+      mouseNeeded: new FormControl(false),
+      headsetNeeded: new FormControl(false),
+      telephoneNeeded: new FormControl(false)
     });
     this.workstationService
       .getAll()
@@ -40,14 +44,12 @@ export class WorkstationListComponent implements OnInit {
 
   }*/
 
-  onSubmit() {
-    this.filteredWorkstations = this.filterByDate(this.workstationList);
-    this.filteredWorkstations = this.filterByMouse(this.filteredWorkstations);
-  }
 
   onChange() {
     this.filteredWorkstations = this.filterByDate(this.workstationList);
     this.filteredWorkstations = this.filterByMouse(this.filteredWorkstations);
+    this.filteredWorkstations = this.filterByHeadset(this.filteredWorkstations);
+    this.filteredWorkstations = this.filterByTelephone(this.filteredWorkstations);
   }
 
   containsDate(selectedDate, value: Workstation) {
@@ -64,7 +66,7 @@ export class WorkstationListComponent implements OnInit {
   }
 
   hasMouse(mouseNeeded, value: Workstation) {
-    if (mouseNeeded === value.mouse) {
+    if (!mouseNeeded || (mouseNeeded === value.mouse)) {
       return true;
     }
     return false;
@@ -72,6 +74,28 @@ export class WorkstationListComponent implements OnInit {
 
   filterByMouse(data: Workstation[]) {
     return data.filter(this.hasMouse.bind(this, this.form.value.mouseNeeded));
+  }
+
+  hasHeadset(headsetNeeded, value: Workstation) {
+    if (!headsetNeeded || (headsetNeeded === value.headset)) {
+      return true;
+    }
+    return false;
+  }
+
+  filterByHeadset(data: Workstation[]) {
+    return data.filter(this.hasHeadset.bind(this, this.form.value.headsetNeeded));
+  }
+
+  hasTelephone(telephoneNeeded, value: Workstation) {
+    if (!telephoneNeeded || (telephoneNeeded === value.telephone)) {
+      return true;
+    }
+    return false;
+  }
+
+  filterByTelephone(data: Workstation[]) {
+    return data.filter(this.hasTelephone.bind(this, this.form.value.telephoneNeeded));
   }
 
 

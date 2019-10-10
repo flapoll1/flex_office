@@ -6,11 +6,13 @@
 
  <br>Gewünschtes Datum: &nbsp;&nbsp; <input type="date" formControlName="selectedDate" (change)="onChange($event)">
   <br>Wird Maus benötigt? &nbsp;&nbsp;<input type="checkbox" formControlName="mouseNeeded" (change)="onChange($event)">
- <br> <button type="submit">Nach freien Plätzen suchen</button>
+  <br>Wird Headset benötigt? &nbsp;&nbsp;<input type="checkbox" formControlName="headsetNeeded" (change)="onChange($event)">
+  <br>Wird Telefon benötigt? &nbsp;&nbsp;<input type="checkbox" formControlName="telephoneNeeded" (change)="onChange($event)">
 </form>
 <div>
   <!--Freie Plätze am {{this.form.value.selectedDate | date: 'dd.MM.yyyy'}}-->
-  <p *ngIf="workstationList?.length === 0">Es sind leider keine freien Plätze verfügbar</p>
+  <p *ngIf="filteredWorkstations?.length === 0">Es sind leider keine freien Plätze verfügbar</p>
+  <p *ngIf="filteredWorkstations?.length != 0 && form.dirty ">Es sind {{filteredWorkstations?.length }} frei(e) Plätze verfügbar</p>
   <ol>
     <li *ngFor="let workstation of filteredWorkstations">
       <ul>
