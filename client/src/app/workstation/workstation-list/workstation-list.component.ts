@@ -43,29 +43,16 @@ export class WorkstationListComponent implements OnInit {
   }*/
 
   onSubmit() {
-    this.filteredWorkstations = this.filterByDate();
-    if (this.form.value.mouseNeeded) {
-      this.workstationList = this.filterByMouse(this.workstationList);
-    }
+    this.filteredWorkstations = this.filterByDate(this.workstationList);
+    this.filteredWorkstations = this.filterByMouse(this.filteredWorkstations);
 
     // this.workstationList = this.func(result);
     console.log(this.workstationList);
   }
 
-  onSelectDay(event) {
-    console.log(event.target.value);
-    this.filteredWorkstations = this.filterByDate();
-    /* this.workstationService.getAll().subscribe(result => {
-      this.workstationList = this.func(result);
-    });
-   // this.workstationList = this.func(result);
-    console.log(this.workstationList);*/
-  }
-
-  onSelectMouse(event) {
-    if (event.target.checked) {
+  onChange(event) {
+    this.filteredWorkstations = this.filterByDate(this.workstationList);
     this.filteredWorkstations = this.filterByMouse(this.filteredWorkstations);
-    }
   }
 
   containsDate(selectedDate, value: Workstation) {
@@ -77,8 +64,7 @@ export class WorkstationListComponent implements OnInit {
     return false;
   }
 
-  filterByDate(): Workstation[] {
-    let data = this.workstationList;
+  filterByDate(data: Workstation[]): Workstation[] {
     var filtered = data.filter(
       this.containsDate.bind(this, this.form.value.selectedDate)
     );
@@ -86,12 +72,15 @@ export class WorkstationListComponent implements OnInit {
     //document.write(filtered);
   }
 
-  hasMouse(value: Workstation) {
-    return value.mouse;
+  hasMouse(mouseNeeded, value: Workstation) {
+    if (mouseNeeded === value.mouse) {
+      return true;
+    }
+    return false;
   }
 
   filterByMouse(data: Workstation[]) {
-    return data.filter(this.hasMouse);
+    return data.filter(this.hasMouse.bind(this, this.form.value.mouseNeeded));
   }
 
   /*ngOnChanges() {

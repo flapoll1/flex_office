@@ -4,8 +4,8 @@
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
- <br>Gewünschtes Datum: &nbsp;&nbsp; <input type="date" formControlName="selectedDate" (change)="onSelectDay($event)">
-  <br>Wird Maus benötigt? &nbsp;&nbsp;<input type="checkbox" formControlName="mouseNeeded" (change)="onSelectMouse($event)">
+ <br>Gewünschtes Datum: &nbsp;&nbsp; <input type="date" formControlName="selectedDate" (change)="onChange($event)">
+  <br>Wird Maus benötigt? &nbsp;&nbsp;<input type="checkbox" formControlName="mouseNeeded" (change)="onChange($event)">
  <br> <button type="submit">Nach freien Plätzen suchen</button>
 </form>
 <div>
