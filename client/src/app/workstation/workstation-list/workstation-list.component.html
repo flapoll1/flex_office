@@ -20,11 +20,11 @@
 
 <div style="width:100%;clear:left;padding-top:10px">
     <a style="float: right" (click)="openRoomplan()"><button>Raumplan</button></a>
-  <p *ngIf="filteredWorkstations?.length === 0">Es sind leider keine freien Plätze verfügbar</p>
+  <p *ngIf="filteredWorkstations?.length === 0">Es sind leider keine freien Plätze verfügbar<img src="/assets/beaker.PNG" style="padding-top:10px"/></p>
   <p *ngIf="filteredWorkstations?.length == 1 ">Es ist {{filteredWorkstations?.length }} freier Platz verfügbar:</p>
   <p *ngIf="filteredWorkstations?.length > 1 ">Es sind {{filteredWorkstations?.length }} freie Plätze verfügbar:</p>
 
-  <table class="table table-striped" *ngIf="filteredWorkstations?.length !== 0">
+  <table class="table table-striped table-hover" *ngIf="filteredWorkstations?.length !== 0">
     <thead style="background:  rgb(29,77,139);color:white">
     <tr>
           <th>Platznummer</th>
