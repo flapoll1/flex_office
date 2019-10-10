@@ -2,3 +2,8 @@
   color: white;
   background: rgb(29,77,139)
 }
+.table td{
+vertical-align: middle;
+padding: 0px
+
+}
