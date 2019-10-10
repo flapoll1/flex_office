@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<p>Flex Office System</p>
+<div>
+  <ul>
+    <li *ngFor="let workstation of workstationList">
+      {{workstation.id}}, {{workstation.label}}, {{workstation.telephone}}, {{workstation.mouse}}, {{workstation.headset}}, {{workstation.noise}}, {{workstation.freeDays}}
+    </li>
+  </ul>
+</div>
+
