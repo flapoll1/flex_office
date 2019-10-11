@@ -24,6 +24,11 @@ export class WorkstationListComponent implements OnInit {
     this.initForm();
   }
 
+  onReservieren(){
+    const myReservierenWindow = window.open('', 'MsgWindow', "width=200,height=100");
+    myReservierenWindow.document.write('Ihr Name: <br><input type="text"><br><button>Abschicken</button>');
+  }
+
   initForm() {
     const todayString = format(startOfToday(), 'yyyy-MM-dd');
     this.form = new FormGroup({
