@@ -25,9 +25,8 @@ export class WorkstationListComponent implements OnInit {
   }
 
   onReservieren(){
-    const myReservierenWindow = window.open('', 'MsgWindow', "width=200,height=100");
-    myReservierenWindow.document.write('Ihr Name: <br><input type="text"><br><button>Abschicken</button>');
-  }
+    const person = prompt('Bitte geben Sie Ihren Namen ein', '');
+}
 
   initForm() {
     const todayString = format(startOfToday(), 'yyyy-MM-dd');
