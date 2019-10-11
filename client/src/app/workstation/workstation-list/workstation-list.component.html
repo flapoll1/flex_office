@@ -33,6 +33,7 @@
           <th  style="text-align:center" > Headset vorhanden</th>
           <th  style="text-align:center" >Lautstärke-Level</th>
           <th  style="text-align:center" >Freie Tage</th>
+          <th  style="text-align:center" ></th>
         </tr>
       </thead>
       <tbody>
@@ -43,6 +44,7 @@
         <td align="center" *ngIf="workstation.headset">ja</td><td align="center" *ngIf="!workstation.headset">nein</td>
         <td align="center" *ngIf="workstation.noise === 0">niedrig</td><td align="center" *ngIf="workstation.noise === 1" >mittel</td><td align="center" *ngIf="workstation.noise === 2" >laut</td>
         <td align="left" ><div style="padding-top:15px;"><ul style="list-style: none"><li *ngFor="let day of workstation.freeDays">{{day | date : 'dd.MM.yyyy'}}</li></ul></div></td>
+        <td align="center" ><div><button>Reservieren</button></div></td>
     </tr>
   </tbody>
   </table>
