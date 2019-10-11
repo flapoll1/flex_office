@@ -1,7 +1,7 @@
 import { Workstation } from './workstation.entity';
 
 export const WORKSTATIONSMOCK: Workstation[] = [
-  {id: 0, label: '3.14/1', telephone: true, mouse: false, headset: false, noise: 0, freeDays: ['2019-11-12', '2019-11-13']},
+  {id: 0, label: '3.14/1', telephone: true, mouse: false, headset: false, noise: 0, freeDays: ['2019-10-12', '2019-10-13']},
   {id: 1, label: '3.14/2', telephone: true, mouse: true, headset: true, noise: 0, freeDays: ['2020-10-11', '2020-10-12']},
   {id: 2, label: '3.14/3', telephone: false, mouse: false, headset: false, noise: 1, freeDays: ['2019-10-11', '2019-10-13']},
   {id: 3, label: '3.14/4', telephone: true, mouse: false, headset: true, noise: 1, freeDays: ['2019-10-14', '2019-10-15']},
